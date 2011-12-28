@@ -15,8 +15,11 @@
  *
  * =====================================================================================
  */
-
+#include "siclog.h"
+//#include "sicdbdao.h"
 int main(){
-
+	debugon();
+	sic_log("---Main---");
+//	sic_dbdao_init();
 	return 0;
 }

@@ -16,10 +16,10 @@
 
 
 
-pkgdatadir = $(datadir)/full-package-name
-pkgincludedir = $(includedir)/full-package-name
-pkglibdir = $(libdir)/full-package-name
-pkglibexecdir = $(libexecdir)/full-package-name
+pkgdatadir = $(datadir)/sic
+pkgincludedir = $(includedir)/sic
+pkglibdir = $(libdir)/sic
+pkglibexecdir = $(libexecdir)/sic
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -40,7 +40,7 @@ am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
-CONFIG_HEADER = $(top_builddir)/config.h
+CONFIG_HEADER = $(top_builddir)/include/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
@@ -48,8 +48,7 @@ PROGRAMS = $(bin_PROGRAMS)
 tdb_SOURCES = tdb.c
 tdb_OBJECTS = tdb.$(OBJEXT)
 tdb_LDADD = $(LDADD)
-tdb_DEPENDENCIES =
-DEFAULT_INCLUDES = -I. -I$(top_builddir)
+DEFAULT_INCLUDES = -I. -I$(top_builddir)/include
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
@@ -68,10 +67,10 @@ AUTOCONF = ${SHELL} /home/rquiss/prog/opencv/final/missing --run autoconf
 AUTOHEADER = ${SHELL} /home/rquiss/prog/opencv/final/missing --run autoheader
 AUTOMAKE = ${SHELL} /home/rquiss/prog/opencv/final/missing --run automake-1.11
 AWK = gawk
-CC = gcc
+CC = clang
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
-CPP = gcc -E
+CFLAGS = -O2 -Wall -g
+CPP = clang -E
 CPPFLAGS = 
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
@@ -94,24 +93,24 @@ LTLIBOBJS =
 MAKEINFO = ${SHELL} /home/rquiss/prog/opencv/final/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 OBJEXT = o
-PACKAGE = full-package-name
-PACKAGE_BUGREPORT = BUG-REPORT-ADDRESS
-PACKAGE_NAME = FULL-PACKAGE-NAME
-PACKAGE_STRING = FULL-PACKAGE-NAME VERSION
-PACKAGE_TARNAME = full-package-name
+PACKAGE = sic
+PACKAGE_BUGREPORT = vabc3h@gmail.com
+PACKAGE_NAME = SIC
+PACKAGE_STRING = SIC 0.1
+PACKAGE_TARNAME = sic
 PACKAGE_URL = 
-PACKAGE_VERSION = VERSION
+PACKAGE_VERSION = 0.1
 PATH_SEPARATOR = :
 RANLIB = ranlib
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = 
-VERSION = VERSION
+VERSION = 0.1
 abs_builddir = /home/rquiss/prog/opencv/final/libsicdb/test
 abs_srcdir = /home/rquiss/prog/opencv/final/libsicdb/test
 abs_top_builddir = /home/rquiss/prog/opencv/final
 abs_top_srcdir = /home/rquiss/prog/opencv/final
-ac_ct_CC = gcc
+ac_ct_CC = clang
 am__include = include
 am__leading_dot = .
 am__quote = 
@@ -149,10 +148,11 @@ target_alias =
 top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
-LDADD = -L../ -lsicdb
-AM_CFLAGS = -O2 -Wall
-AM_CPPFLAGS = -I../../include
-AM_LDFLAGS = `mysql_config --cflags`
+
+#AM_CFLAGS	= -O2 -Wall -Dtc
+AM_LDFLAGS = `pkg-config sqlite3 --libs`
+LDADD = -L../ -lsicdb -L../../util -lsicutil
+tdb_DEPENDENCIES = ../libsicdb.a
 all: all-am
 
 .SUFFIXES:
@@ -448,6 +448,9 @@ uninstall-am: uninstall-binPROGRAMS
 	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
 	uninstall-am uninstall-binPROGRAMS
 
+
+../libsicdb.a :
+		make -C ..
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

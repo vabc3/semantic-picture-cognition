@@ -1,5 +1,0 @@
-AM_CFLAGS	= -O2 -Wall
-AM_CPPFLAGS	= -I../../include
-AM_LDFLAGS	= -L../ -lsicdb
-
-bin_PROGRAMS = tdb

@@ -2,16 +2,16 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.68])
-AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
-AC_CONFIG_SRCDIR([config.h.in])
-AC_CONFIG_HEADERS([config.h])
+AC_INIT([SIC], [0.1], [vabc3h@gmail.com])
+AC_CONFIG_SRCDIR([src/sic.c])
+AC_CONFIG_HEADERS([include/config.h])
 AM_INIT_AUTOMAKE
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_RANLIB
 # Checks for libraries.
 # FIXME: Replace `main' with a function in `-lsicdb':
-AC_CHECK_LIB([sicdb], [main])
+#AC_CHECK_LIB([sicdb], [main])
 
 # Checks for header files.
 AC_CHECK_HEADERS([stdlib.h])
@@ -23,5 +23,11 @@ AC_FUNC_MALLOC
 
 AC_CONFIG_FILES([Makefile
                  libsicdb/Makefile
-                 libsicdb/test/Makefile])
+                 libsicdb/test/Makefile
+				 util/Makefile
+				 src/Makefile
+				 ])
+#AC_SUBST(CFLAGS)
+CFLAGS="-O2 -Wall -g"
 AC_OUTPUT
+

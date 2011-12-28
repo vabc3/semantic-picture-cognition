@@ -39,7 +39,7 @@ am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(install_sh) -d
-CONFIG_HEADER = $(top_builddir)/config.h
+CONFIG_HEADER = $(top_builddir)/include/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
@@ -69,9 +69,9 @@ AR = ar
 ARFLAGS = cru
 libsicdb_a_AR = $(AR) $(ARFLAGS)
 libsicdb_a_LIBADD =
-am_libsicdb_a_OBJECTS = sicdbdao.$(OBJEXT)
+am_libsicdb_a_OBJECTS = dao.$(OBJEXT) dao_sqlite3.$(OBJEXT)
 libsicdb_a_OBJECTS = $(am_libsicdb_a_OBJECTS)
-DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
+DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/include
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
@@ -171,9 +171,8 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-AM_CFLAGS = -O2 -Wall -I../include
 lib_LIBRARIES = libsicdb.a
-libsicdb_a_SOURCES = sicdbdao.c
+libsicdb_a_SOURCES = dao.c dao_sqlite3.c
 all: all-am
 
 .SUFFIXES:
@@ -251,7 +250,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sicdbdao.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dao.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dao_sqlite3.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

@@ -1,4 +1,0 @@
-AM_CFLAGS 		= -O2 -Wall
-lib_LIBRARIES 	= libsicdb.a
-
-libsicdb_a_SOURCES = sicdbdao.c

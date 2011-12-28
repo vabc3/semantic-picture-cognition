@@ -1,1 +1,1 @@
-SUBDIRS = libsicdb
+SUBDIRS = util libsicdb src
