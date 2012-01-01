@@ -22,7 +22,8 @@ using namespace std;
 
 int main()
 {
-	char af[255];
-	sic_getver(af);
-	cout<<af<<endl;
+	
+	//conn
+	//jsonvs
+	return 0;
 }
