@@ -1,1 +1,3 @@
-SUBDIRS = util libsicdb src
+AUTOMAKE_OPTIONS=foreign 
+CLEANFILES = *~
+SUBDIRS = libsift libsic src

@@ -34,8 +34,8 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = sic$(EXEEXT)
-subdir = src
+bin_PROGRAMS = ad$(EXEEXT) file$(EXEEXT)
+subdir = libsic/test
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -47,10 +47,13 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_sic_OBJECTS = main.$(OBJEXT) arg.$(OBJEXT) func.$(OBJEXT)
-sic_OBJECTS = $(am_sic_OBJECTS)
-sic_LDADD = $(LDADD)
-sic_DEPENDENCIES = ../libsic/libsic.la
+ad_SOURCES = ad.c
+ad_OBJECTS = ad.$(OBJEXT)
+ad_LDADD = $(LDADD)
+file_SOURCES = file.c
+file_OBJECTS = file.$(OBJEXT)
+file_LDADD = $(LDADD)
+file_DEPENDENCIES =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -64,8 +67,8 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(sic_SOURCES)
-DIST_SOURCES = $(sic_SOURCES)
+SOURCES = ad.c file.c
+DIST_SOURCES = ad.c file.c
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -187,10 +190,10 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-AM_CFLAGS = -I../libsic
-#AM_LDFLAGS		= `pkg-config --libs opencv`
-LDADD = ../libsic/libsic.la -L../libsift -lsift
-sic_SOURCES = main.c arg.c func.c
+AM_CFLAGS = `pkg-config --cflags opencv`
+AM_LDFLAGS = `pkg-config --libs sqlite3 opencv`
+LDADD = -L../ -lsic -L../../libsift -lsift
+ad_DEPENDENCIES = ../libsic.a
 all: all-am
 
 .SUFFIXES:
@@ -204,9 +207,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign libsic/test/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign src/Makefile
+	  $(AUTOMAKE) --foreign libsic/test/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -268,9 +271,12 @@ clean-binPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
-sic$(EXEEXT): $(sic_OBJECTS) $(sic_DEPENDENCIES) 
-	@rm -f sic$(EXEEXT)
-	$(LINK) $(sic_OBJECTS) $(sic_LDADD) $(LIBS)
+ad$(EXEEXT): $(ad_OBJECTS) $(ad_DEPENDENCIES) 
+	@rm -f ad$(EXEEXT)
+	$(LINK) $(ad_OBJECTS) $(ad_LDADD) $(LIBS)
+file$(EXEEXT): $(file_OBJECTS) $(file_DEPENDENCIES) 
+	@rm -f file$(EXEEXT)
+	$(LINK) $(file_OBJECTS) $(file_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -278,9 +284,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/arg.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/func.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ad.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/file.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -509,7 +514,9 @@ uninstall-am: uninstall-binPROGRAMS
 	pdf pdf-am ps ps-am tags uninstall uninstall-am \
 	uninstall-binPROGRAMS
 
-#sic_LDFLAGS	= -static
+
+../libsic.a :
+		make -C ..
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
