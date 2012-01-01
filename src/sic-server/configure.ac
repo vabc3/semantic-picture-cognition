@@ -7,7 +7,7 @@ AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.
-AC_PROG_CC
+AC_PROG_CXX
 
 AM_INIT_AUTOMAKE
 # Checks for libraries.
