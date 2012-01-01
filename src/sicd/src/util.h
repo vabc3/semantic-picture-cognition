@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  main.cpp
+ *       Filename:  util.h
  *
- *    Description:  Main sicd
+ *    Description:  Utils
  *
  *        Version:  1.0
- *        Created:  2012年01月01日 19时49分01秒
+ *        Created:  2012年01月01日 22时41分50秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -17,13 +17,9 @@
  */
 
 #include <iostream>
-#include <sic.h>
-using namespace std;
-
-int main()
-{
-	
-	//conn
-	//jsonvs
-	return 0;
+namespace sicd{
+	class log{
+		public:
+			logr();
+	};
 }

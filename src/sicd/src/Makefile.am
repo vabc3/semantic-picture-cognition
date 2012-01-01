@@ -1,2 +1,2 @@
 bin_PROGRAMS	= sicd
-sicd_SOURCES	= main.cpp
+sicd_SOURCES	= main.cpp net.cpp

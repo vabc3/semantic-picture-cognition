@@ -1,0 +1,48 @@
+# depslib dependency file v1.0
+1325433528 source:/home/rquiss/git/semantic-picture-cognition/src/sics/main.cpp
+	<iostream>
+	<sic.h>
+	"net.h"
+
+1325433528 /home/rquiss/git/semantic-picture-cognition/src/sics/net.h
+
+1325433607 source:/home/rquiss/git/semantic-picture-cognition/src/sics/net.cpp
+	<iostream>
+	"net.h"
+
+1325433993 source:/home/rquiss/git/semantic-picture-cognition/src/sics/log.cpp
+	"util.h"
+	<iostream>
+
+1325433970 /home/rquiss/git/semantic-picture-cognition/src/sics/util.h
+	<string>
+
+1325434713 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/log.cpp
+	"util.h"
+	<iostream>
+
+1325433970 /home/rquiss/git/semantic-picture-cognition/src/sics/include/util.h
+	<string>
+
+1325435158 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/main.cpp
+	<sic.h>
+	"net.h"
+	"util.h"
+	"sicw.h"
+
+1325433528 /home/rquiss/git/semantic-picture-cognition/src/sics/include/net.h
+
+1325433607 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/net.cpp
+	<iostream>
+	"net.h"
+
+1325435264 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/sicw.cpp
+	"sicw.h"
+	<sic.h>
+
+1325434555 /home/rquiss/git/semantic-picture-cognition/src/sics/include/sicw.h
+	<string>
+
+1325435091 source:/home/rquiss/git/semantic-picture-cognition/src/sics/test.cpp
+	"sicw.h"
+

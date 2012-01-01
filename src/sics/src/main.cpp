@@ -16,16 +16,21 @@
  * =====================================================================================
  */
 
-#include <iostream>
 #include <sic.h>
 #include "net.h"
+#include "util.h"
+#include "sicw.h"
 using namespace sicd;
 
 int main()
 {
-	Net n;
-	n.run();
-	//conn
+	Log logger;
+	Sicw sw;
+
+	logger.logr(sw.getver());
+
+
+    //conn
 	//jsonvs
 	return 0;
 }

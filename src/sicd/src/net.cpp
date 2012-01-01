@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  main.cpp
+ *       Filename:  net.cpp
  *
- *    Description:  Main sicd
+ *    Description:  impl net
  *
  *        Version:  1.0
- *        Created:  2012年01月01日 19时49分01秒
+ *        Created:  2012年01月01日 22时28分45秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -15,17 +15,15 @@
  *
  * =====================================================================================
  */
-
 #include <iostream>
-#include <sic.h>
-#include "net.h"
-using namespace sicd;
+#include <net.h>
+using namespace std;
+namespace sicd{
+	Net::Net(){
+	}
 
-int main()
-{
-	Net n;
-	n.run();
-	//conn
-	//jsonvs
-	return 0;
+	void Net::run()
+	{	
+		cout<<"In run\n";
+	}
 }

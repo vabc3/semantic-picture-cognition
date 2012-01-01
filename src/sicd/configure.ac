@@ -11,8 +11,8 @@ AC_PROG_CXX
 
 AM_INIT_AUTOMAKE
 # Checks for libraries.
-AC_SEARCH_LIBS(cvLine,opencv_core,,AC_MSG_ERROR([opencv lib needed]))
-AC_SEARCH_LIBS(sic_getver,sic,,AC_MSG_ERROR([sic lib needed]))
+#AC_SEARCH_LIBS(cvLine,opencv_core,,AC_MSG_ERROR([opencv lib needed]))
+#AC_SEARCH_LIBS(sic_getver,sic,,AC_MSG_ERROR([sic lib needed]))
 
 # Checks for header files.
 
