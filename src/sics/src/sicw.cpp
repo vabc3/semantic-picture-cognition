@@ -4,7 +4,8 @@
 using namespace sicd;
 Sicw::Sicw()
 {
-    //ctor
+
+
 }
 
 Sicw::~Sicw()
@@ -20,11 +21,12 @@ Sicw::Sicw(const Sicw& other)
 string Sicw::getver()
 {
     char buf[255];
+    sic_debug();
     sic_getver(buf);
     string tmp(buf);
-    sic_debug();
-    sic_init();
-    sic_status(0,0);
-    sic_end();
+
+//    sic_init();
+  //  sic_status(0,0);
+    //sic_end();
     return tmp;
 }

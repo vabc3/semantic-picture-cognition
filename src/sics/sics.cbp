@@ -22,6 +22,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-Wall" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -29,8 +30,20 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-Wall" />
+			<Add directory="include" />
 		</Compiler>
+		<Linker>
+			<Add library="sic" />
+		</Linker>
+		<Unit filename="include/Sic_json.h" />
+		<Unit filename="include/net.h" />
+		<Unit filename="include/sicw.h" />
+		<Unit filename="include/util.h" />
+		<Unit filename="src/Sic_json.cpp" />
+		<Unit filename="src/log.cpp" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/net.cpp" />
+		<Unit filename="src/sicw.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

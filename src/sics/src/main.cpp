@@ -16,21 +16,26 @@
  * =====================================================================================
  */
 
-#include <sic.h>
+
 #include "net.h"
-#include "util.h"
-#include "sicw.h"
+#include <signal.h>
+
 using namespace sicd;
+
+
+static void endsr(int sig)
+{
+    //printf("Sig:%d\n",sig);
+    //cout
+}
 
 int main()
 {
-	Log logger;
-	Sicw sw;
+    signal(SIGINT, endsr);
+    signal(SIGPIPE, endsr);
 
-	logger.logr(sw.getver());
+    Net ne(1213);
+    ne.run();
 
-
-    //conn
-	//jsonvs
 	return 0;
 }

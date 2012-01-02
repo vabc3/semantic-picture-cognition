@@ -15,11 +15,25 @@
  *
  * =====================================================================================
  */
+#ifndef NET_H
+#define NET_H
+
+#include "util.h"
+#include "sicw.h"
 
 namespace sicd{
 	class Net{
+	    private:
+            static Log logger;
+            Sicw sicw;
+            string verinfo;
+            int port,msock, csock;
+            void sockwrite(string st);
 		public:
-			Net();
+			Net(int port);
+			~Net();
 			void run();
 	};
 }
+
+#endif

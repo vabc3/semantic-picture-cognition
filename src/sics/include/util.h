@@ -15,7 +15,8 @@
  *
  * =====================================================================================
  */
-
+#ifndef UTIL_H
+#define UTIL_H
 #include <string>
 using namespace std;
 namespace sicd{
@@ -24,3 +25,4 @@ namespace sicd{
             void logr(string st);
 	};
 }
+#endif

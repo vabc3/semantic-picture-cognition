@@ -11,12 +11,12 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-
+#include <netinet/in.h>
 #include <arpa/inet.h>
 #define SERVPORT 1212
-#define BACKLOG  2
+#define BACKLOG  10
 #define dataSize 100
-int maind()
+int mainc()
 {
     int sockfd,client_fd;
     struct sockaddr_in my_addr,remote_addr;
@@ -63,9 +63,42 @@ int maind()
         if(!fork())
         {
             char content[50];
-            printf("I'm child");
 
+            while(1)
+            {
+gg:
+                FD_ZERO(&rfds);
+                FD_SET(client_fd,&rfds);
+                FD_ZERO(&wfds);
+                FD_SET(client_fd,&wfds);
+                tags=select(client_fd+1,&rfds,&wfds,NULL,&timeout);
+                switch(tags)
+                {
+
+                case -1:
+                    printf("出错");
+                    exit(-1);
+                    break;
+                case 0:
+                    printf("没有数据");
+                    goto gg ;
+                default:
+                    if(FD_ISSET(client_fd,&rfds))
+                    {
+                        read(client_fd,&content,50);
+                        printf("client data is :%s",content);
+                    }
+                    if(FD_ISSET(client_fd,&wfds))
+                    {
+                        write(client_fd,"i come from server ",50);
+
+                    }
+                    break;
+                }
+            }
+
+            close(client_fd);
+            exit(0);
         }
-        close(client_fd);
     }
 }

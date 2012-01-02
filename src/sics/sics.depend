@@ -6,9 +6,22 @@
 
 1325433528 /home/rquiss/git/semantic-picture-cognition/src/sics/net.h
 
-1325433607 source:/home/rquiss/git/semantic-picture-cognition/src/sics/net.cpp
-	<iostream>
-	"net.h"
+1325514870 source:/home/rquiss/git/semantic-picture-cognition/src/sics/net.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<fcntl.h>
+	<assert.h>
+	<netdb.h>
+	<unistd.h>
+	<errno.h>
+	<sys/types.h>
+	<sys/select.h>
+	<sys/stat.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
 
 1325433993 source:/home/rquiss/git/semantic-picture-cognition/src/sics/log.cpp
 	"util.h"
@@ -21,28 +34,66 @@
 	"util.h"
 	<iostream>
 
-1325433970 /home/rquiss/git/semantic-picture-cognition/src/sics/include/util.h
+1325514779 /home/rquiss/git/semantic-picture-cognition/src/sics/include/util.h
 	<string>
 
-1325435158 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/main.cpp
-	<sic.h>
+1325519115 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/main.cpp
 	"net.h"
+	<signal.h>
+
+1325518213 /home/rquiss/git/semantic-picture-cognition/src/sics/include/net.h
 	"util.h"
 	"sicw.h"
 
-1325433528 /home/rquiss/git/semantic-picture-cognition/src/sics/include/net.h
-
-1325433607 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/net.cpp
+1325522318 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/net.cpp
 	<iostream>
+	<netinet/in.h>
+	<stdlib.h>
+	<fcntl.h>
+	<stdio.h>
+	<string.h>
+	<sys/types.h>
+	<unistd.h>
+	<arpa/inet.h>
 	"net.h"
+	"sicw.h"
 
-1325435264 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/sicw.cpp
+1325516967 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/sicw.cpp
 	"sicw.h"
 	<sic.h>
 
 1325434555 /home/rquiss/git/semantic-picture-cognition/src/sics/include/sicw.h
 	<string>
 
-1325435091 source:/home/rquiss/git/semantic-picture-cognition/src/sics/test.cpp
-	"sicw.h"
+1325506273 source:/home/rquiss/git/semantic-picture-cognition/src/sics/test.cpp
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<fcntl.h>
+	<assert.h>
+	<netdb.h>
+	<unistd.h>
+	<errno.h>
+	<sys/types.h>
+	<sys/select.h>
+	<sys/stat.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<arpa/inet.h>
+
+1325514897 source:/home/rquiss/git/semantic-picture-cognition/src/sics/tn.cpp
+	<netinet/in.h>
+	<signal.h>
+	<stdlib.h>
+	<fcntl.h>
+	<stdio.h>
+	<string.h>
+	<sys/types.h>
+	<unistd.h>
+	<arpa/inet.h>
+
+1325518707 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/Sic_json.cpp
+	"Sic_json.h"
+
+1325518707 /home/rquiss/git/semantic-picture-cognition/src/sics/include/Sic_json.h
 
