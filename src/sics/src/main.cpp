@@ -18,6 +18,7 @@
 
 
 #include "net.h"
+#include "Sic_json.h"
 #include <signal.h>
 
 using namespace sicd;
@@ -33,6 +34,7 @@ int main()
 {
     signal(SIGINT, endsr);
     signal(SIGPIPE, endsr);
+
 
     Net ne(1213);
     ne.run();

@@ -37,15 +37,16 @@
 1325514779 /home/rquiss/git/semantic-picture-cognition/src/sics/include/util.h
 	<string>
 
-1325519115 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/main.cpp
+1325656475 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/main.cpp
 	"net.h"
+	"Sic_json.h"
 	<signal.h>
 
 1325518213 /home/rquiss/git/semantic-picture-cognition/src/sics/include/net.h
 	"util.h"
 	"sicw.h"
 
-1325522318 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/net.cpp
+1325659163 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/net.cpp
 	<iostream>
 	<netinet/in.h>
 	<stdlib.h>
@@ -57,6 +58,8 @@
 	<arpa/inet.h>
 	"net.h"
 	"sicw.h"
+	"jrequest.h"
+	"jresponse.h"
 
 1325516967 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/sicw.cpp
 	"sicw.h"
@@ -92,8 +95,35 @@
 	<unistd.h>
 	<arpa/inet.h>
 
-1325518707 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/Sic_json.cpp
+1325568629 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/Sic_json.cpp
 	"Sic_json.h"
 
-1325518707 /home/rquiss/git/semantic-picture-cognition/src/sics/include/Sic_json.h
+1325657455 /home/rquiss/git/semantic-picture-cognition/src/sics/include/Sic_json.h
+
+1325656949 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/jrequest.cpp
+	"jrequest.h"
+	<iostream>
+	<cstdio>
+
+1325577202 /home/rquiss/git/semantic-picture-cognition/src/sics/include/jrequest.h
+	<string>
+	<json/json.h>
+	"net.h"
+	"jmsg.h"
+
+1325657413 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/jresponse.cpp
+	"jresponse.h"
+	<json/json.h>
+
+1325658193 /home/rquiss/git/semantic-picture-cognition/src/sics/include/jresponse.h
+	"jmsg.h"
+	<string>
+
+1325659705 source:/home/rquiss/git/semantic-picture-cognition/src/sics/src/jmsg.cpp
+	"jmsg.h"
+	<iostream>
+
+1325659772 /home/rquiss/git/semantic-picture-cognition/src/sics/include/jmsg.h
+	<string>
+	<json/json.h>
 

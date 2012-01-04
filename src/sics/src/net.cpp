@@ -26,6 +26,8 @@
 #include <arpa/inet.h>
 #include "net.h"
 #include "sicw.h"
+#include "jrequest.h"
+#include "jresponse.h"
 
 namespace sicd
 {
@@ -79,6 +81,14 @@ void Net::run()
     struct sockaddr_in remote_addr;
 
     char buf[bufsize];
+
+    Cmsg cm(2,"err");
+    cm=errmsg;
+    cout<<cm<<endl;
+
+    exit(0);
+
+
 
     while(1)
     {

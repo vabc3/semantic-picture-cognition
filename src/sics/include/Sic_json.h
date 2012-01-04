@@ -2,13 +2,25 @@
 #define SIC_JSON_H
 
 
+namespace sicd
+{
+
+
 class Sic_json
 {
-    public:
-        Sic_json();
-        virtual ~Sic_json();
-    protected:
-    private:
-};
+public:
 
+    typedef enum
+    {
+        Cstatus,Cmatch,Cversion
+    } cmds;
+
+    Sic_json();
+    virtual ~Sic_json();
+
+    void gen();
+
+private:
+};
+}
 #endif // SIC_JSON_H
