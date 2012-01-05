@@ -4,13 +4,13 @@
 using namespace sicd;
 Sicw::Sicw()
 {
-
-
+    //sic_debug();
+    sic_init(NULL);
 }
 
 Sicw::~Sicw()
 {
-    //dtor
+    sic_end();
 }
 
 Sicw::Sicw(const Sicw& other)
@@ -21,7 +21,7 @@ Sicw::Sicw(const Sicw& other)
 string Sicw::getver()
 {
     char buf[255];
-    sic_debug();
+
     sic_getver(buf);
     string tmp(buf);
 
@@ -29,4 +29,9 @@ string Sicw::getver()
   //  sic_status(0,0);
     //sic_end();
     return tmp;
+}
+
+int Sicw::getstatus()
+{
+    return sic_getstatus()->count;
 }

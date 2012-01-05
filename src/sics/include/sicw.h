@@ -12,6 +12,7 @@ public:
     virtual ~Sicw();
     Sicw(const Sicw& other);
     string getver();
+    int getstatus();
 protected:
 private:
 };

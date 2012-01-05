@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="include/jmsg.h" open="1" top="0" tabpos="2">
-		<Cursor position="391" topLine="0" />
+	<File name="include/cmdhanlder.h" open="1" top="1" tabpos="1">
+		<Cursor position="262" topLine="0" />
+	</File>
+	<File name="include/jmsg.h" open="0" top="0" tabpos="2">
+		<Cursor position="201" topLine="0" />
 	</File>
 	<File name="include/jrequest.h" open="0" top="0" tabpos="0">
-		<Cursor position="171" topLine="0" />
+		<Cursor position="228" topLine="0" />
 	</File>
-	<File name="include/jresponse.h" open="1" top="0" tabpos="4">
-		<Cursor position="227" topLine="0" />
+	<File name="include/jresponse.h" open="1" top="0" tabpos="5">
+		<Cursor position="826" topLine="18" />
 	</File>
 	<File name="include/net.h" open="0" top="0" tabpos="2">
-		<Cursor position="530" topLine="8" />
+		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="include/sicw.h" open="1" top="1" tabpos="5">
-		<Cursor position="140" topLine="0" />
+	<File name="include/sicw.h" open="0" top="0" tabpos="5">
+		<Cursor position="208" topLine="0" />
 	</File>
 	<File name="include/util.h" open="0" top="0" tabpos="0">
-		<Cursor position="585" topLine="4" />
+		<Cursor position="585" topLine="0" />
 	</File>
-	<File name="src/jmsg.cpp" open="1" top="0" tabpos="1">
+	<File name="src/cmdhanlder.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="497" topLine="6" />
+	</File>
+	<File name="src/jmsg.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="110" topLine="0" />
 	</File>
-	<File name="src/jrequest.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="1040" topLine="0" />
+	<File name="src/jrequest.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="475" topLine="26" />
 	</File>
 	<File name="src/jresponse.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="112" topLine="0" />
+		<Cursor position="309" topLine="0" />
 	</File>
 	<File name="src/log.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="54" topLine="0" />
+		<Cursor position="127" topLine="0" />
 	</File>
 	<File name="src/main.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="525" topLine="12" />
+		<Cursor position="713" topLine="14" />
 	</File>
-	<File name="src/net.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="1752" topLine="71" />
+	<File name="src/net.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="2981" topLine="121" />
 	</File>
 	<File name="src/sicw.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="218" topLine="0" />
+		<Cursor position="79" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

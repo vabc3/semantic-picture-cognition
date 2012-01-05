@@ -29,10 +29,47 @@
 #include "jrequest.h"
 #include "jresponse.h"
 
+#include "cmdhanlder.h"
+
 namespace sicd
 {
 
 Log Net::logger;
+
+const int bufsize=8;
+const int sizeprefix=4;
+
+void Net::sockwrite(string st)
+{
+    char buf[4];
+    int n =st.length();
+    sprintf(buf,"%04d",n);
+    string tmp(buf);
+    write(csock,(tmp+st+'\n').c_str(),st.length()+5);
+}
+
+int Net::sockread(string &st)
+{
+    int n,c;
+    char buf[5],sbuf[1024];
+    buf[4]='\0';
+    int rt=read(csock,buf,4);
+
+    if(rt<0){
+        logger.logr("Connect error");
+        return -1;
+    }else if((n=atoi(buf))<=0){
+        logger.logr("Format error");
+        return -1;
+    }else{
+
+        c=read(csock,sbuf,1024);
+        sbuf[n]='\0';
+    }
+    string tmp(sbuf);
+    st=tmp;
+    return 0;
+}
 
 
 Net::Net(int port)
@@ -58,7 +95,7 @@ Net::Net(int port)
     if (listen(msock, 4) < 0)
     {
         logger.logr("Error: Can't listen to %d. (errno %d)\n");
-       exit(-1);
+        exit(-1);
     }
 
     logger.logr("Start OK");
@@ -69,24 +106,12 @@ Net::~Net()
     close(msock);
 }
 
-void Net::sockwrite(string st)
-{
-    write(csock,(st+"\n").c_str(),st.length()+1);
-}
-
-
-const int bufsize=8;
 void Net::run()
 {
     struct sockaddr_in remote_addr;
 
-    char buf[bufsize];
 
-    Cmsg cm(2,"err");
-    cm=errmsg;
-    cout<<cm<<endl;
-
-    exit(0);
+    Cmdhanlder ch;
 
 
 
@@ -98,59 +123,36 @@ void Net::run()
             perror("accept error\n");
             continue;
         }
-
         printf("received a connection from %s %u\n",inet_ntoa(remote_addr.sin_addr),ntohs(remote_addr.sin_port));
-
-        sockwrite(verinfo);
-
+        //sockwrite(verinfo);
         cout<<"Welcome sended\n";
-
-
         //fcntl(csock, F_SETFL, O_NONBLOCK);
 
-        int wr=0,rt;
         string sts;
+        int rt;
         while(1)
         {
-            sts="";
-            while((rt=read(csock,buf,bufsize))>0){
-                int i;
-                printf("%ld:::",strlen(buf));
-
-
-                string tmp(buf);
-                cout<<"{rt="<<rt<<",Conetent:";
-
-                for(i=0;i<strlen(buf);i++){
-                    printf("%d|",buf[i]);
-                }
-
-                cout<<"}"<<endl;
-                sts+=tmp;
-                bzero(buf,bufsize);
-            }
-
-            cout<<sts<<endl;
-
-            if(rt<0)
+            cout<<"{Inwire}\n";
+            rt=sockread(sts);
+            if(rt==-1){
+                sockwrite(errfmt.to_json());
                 break;
+            }
+            //cout<<sts<<endl;
 
-            if(buf[0]=='q')
+            if(sts=="q")
             {
                 write(csock,"bye\n",4);
-
-                close(csock);
-                printf("End_%s:%hx\n",inet_ntoa(remote_addr.sin_addr),remote_addr.sin_port);
+               // close(csock);
                 break;
             }
+            JRequest jr(sts);
+            JResponse jp=ch.process(jr);
 
-            int rt=-1;
-            if((rt=write(csock,buf,3))<0)
-            {
-                printf("rt=%d\n",rt);
-                break;
-            }
+            sockwrite(jp.to_json());
         }
+        close(csock);
+        printf("End_%s:%hx\n",inet_ntoa(remote_addr.sin_addr),remote_addr.sin_port);
         cout<<"Connection Ended\n";
     }
 }

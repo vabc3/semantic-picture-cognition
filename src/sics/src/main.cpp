@@ -32,7 +32,7 @@ static void endsr(int sig)
 
 int main()
 {
-    signal(SIGINT, endsr);
+ //   signal(SIGINT, endsr);
     signal(SIGPIPE, endsr);
 
 

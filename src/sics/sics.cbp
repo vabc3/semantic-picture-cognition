@@ -36,12 +36,14 @@
 			<Add library="sic" />
 			<Add library="json" />
 		</Linker>
+		<Unit filename="include/cmdhanlder.h" />
 		<Unit filename="include/jmsg.h" />
 		<Unit filename="include/jrequest.h" />
 		<Unit filename="include/jresponse.h" />
 		<Unit filename="include/net.h" />
 		<Unit filename="include/sicw.h" />
 		<Unit filename="include/util.h" />
+		<Unit filename="src/cmdhanlder.cpp" />
 		<Unit filename="src/jmsg.cpp" />
 		<Unit filename="src/jrequest.cpp" />
 		<Unit filename="src/jresponse.cpp" />

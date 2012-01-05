@@ -15,7 +15,6 @@ class Jmsg
         json_object* getobj(string);
         json_object* getobj(json_object *obj,string);
         string getstr(json_object *obj,string);
-
         friend ostream& operator<< (ostream & os,Jmsg &t1);
     private:
 };

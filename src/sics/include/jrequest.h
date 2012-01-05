@@ -10,10 +10,10 @@ using namespace std;
 namespace sicd
 {
 
-class JRequest : Jmsg
+class JRequest :public Jmsg
 {
     public:
-        friend class Net;
+        friend class Cmdhanlder;
         JRequest(string cmd,string path);
         JRequest(string json);
         virtual ~JRequest();

@@ -27,8 +27,9 @@ namespace sicd{
             static Log logger;
             Sicw sicw;
             string verinfo;
-            int port,msock, csock;
+            int port,msock,csock;
             void sockwrite(string st);
+            int sockread(string& st);
 		public:
 			Net(int port);
 			~Net();
