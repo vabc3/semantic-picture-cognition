@@ -79,10 +79,10 @@ AUTOCONF = ${SHELL} /home/rquiss/prog/opencv/final/missing --run autoconf
 AUTOHEADER = ${SHELL} /home/rquiss/prog/opencv/final/missing --run autoheader
 AUTOMAKE = ${SHELL} /home/rquiss/prog/opencv/final/missing --run automake-1.11
 AWK = gawk
-CC = icc
+CC = clang
 CCDEPMODE = depmode=gcc3
 CFLAGS = -O2 -g -Werror
-CPP = icc -E
+CPP = clang -E
 CPPFLAGS = 
 CXX = g++
 CXXCPP = g++ -E
@@ -106,10 +106,10 @@ INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-LD = /usr/bin/ld -m elf_x86_64
+LD = /usr/bin/x86_64-pc-linux-gnu-ld -m elf_x86_64
 LDFLAGS = 
 LIBOBJS = 
-LIBS = -lopencv_highgui -lopencv_core -lsqlite3 
+LIBS = -lopencv_highgui -lopencv_core -lm -lsqlite3 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
@@ -126,23 +126,23 @@ OTOOL64 =
 PACKAGE = sic
 PACKAGE_BUGREPORT = vabc3h@gmail.com
 PACKAGE_NAME = SIC
-PACKAGE_STRING = SIC 0.1.1
+PACKAGE_STRING = SIC 0.1.2
 PACKAGE_TARNAME = sic
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.1.1
+PACKAGE_VERSION = 0.1.2
 PATH_SEPARATOR = :
 RANLIB = ranlib
 SED = /bin/sed
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = strip
-VERSION = 0.1.1
+VERSION = 0.1.2
 abs_builddir = /home/rquiss/prog/opencv/final/libsic/test
 abs_srcdir = /home/rquiss/prog/opencv/final/libsic/test
 abs_top_builddir = /home/rquiss/prog/opencv/final
 abs_top_srcdir = /home/rquiss/prog/opencv/final
 ac_ct_AR = ar
-ac_ct_CC = icc
+ac_ct_CC = clang
 ac_ct_CXX = g++
 ac_ct_DUMPBIN = 
 am__include = include
@@ -207,9 +207,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu libsic/test/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign libsic/test/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu libsic/test/Makefile
+	  $(AUTOMAKE) --foreign libsic/test/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
