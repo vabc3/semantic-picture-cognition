@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  func.h
+ *       Filename:  pall.c
  *
- *    Description:  functions
+ *    Description:  i
  *
  *        Version:  1.0
- *        Created:  2011年12月30日 19时19分18秒
+ *        Created:  2012年01月07日 23时33分47秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -16,4 +16,21 @@
  * =====================================================================================
  */
 
-extern void docmd();
+#include "pall.h"
+#include "plugins.h"
+
+int sic_pall_init()
+{
+	sic_plugin_init();
+	pfix_init();
+	pfeat_init();
+
+	return 0;
+}
+
+int sic_pall_end()
+{
+	sic_plugin_end();
+
+	return 0;
+}

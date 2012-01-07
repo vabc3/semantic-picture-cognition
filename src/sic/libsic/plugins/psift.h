@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  func.h
+ *       Filename:  psift.h
  *
- *    Description:  functions
+ *    Description:  
  *
  *        Version:  1.0
- *        Created:  2011年12月30日 19时19分18秒
+ *        Created:  2012年01月08日 00时14分03秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -15,5 +15,10 @@
  *
  * =====================================================================================
  */
-
-extern void docmd();
+#include "imgfeatures.h"
+typedef struct feature sift_feat;
+typedef struct siftf
+{
+	int n;
+	sift_feat feat;
+}sic_sift;

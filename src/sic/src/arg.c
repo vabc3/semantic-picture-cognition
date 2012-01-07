@@ -40,6 +40,8 @@ static struct option lop[] ={
 };
 static char sop[]="dvsciomlp:k:hbn";
 
+sic_opt op;
+
 /*
 static void argdump(sic_opt *p)
 {
@@ -63,6 +65,7 @@ void parse_opt(int argc,char **argv)
 	op.cmd		=Cundef;
 	op.debug	= 0;
 	op.dbarg	= getenv("HOME");
+	op.dbarg	= NULL;
 	op.path		= NULL;
 	op.key		= NULL;
 	op.showlist	= 0;

@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  func.h
+ *       Filename:  fd.c
  *
- *    Description:  functions
+ *    Description:  
  *
  *        Version:  1.0
- *        Created:  2011年12月30日 19时19分18秒
+ *        Created:  2012年01月06日 22时00分42秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -16,4 +16,8 @@
  * =====================================================================================
  */
 
-extern void docmd();
+#include "util.h"
+int main()
+{	debugon();	
+	dir_ftclean("/tmp","ft");
+}

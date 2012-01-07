@@ -18,9 +18,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "sicutil.h"
-#include "sicdbdao.h"
-#include "sicdbdao_sqlite3.h"
+#include "util.h"
+#include "dao.h"
+#include "dao_sqlite3.h"
 
 
 
@@ -36,12 +36,13 @@ void dbitems_print(sic_dbitem** const items,const int count)
 
 void dbitem_print(const sic_dbitem *item)
 {
-	sic_log("|%s-%s-%s\t|",item->imagefile,item->featurefile,item->description);
+	sic_log("%d|%s|%s|%s|",item->id,item->imagefile,item->featurefile,item->description);
 }
 
-inline int make_sic_dbitem(sic_dbitem *p,const char *imagefile,
+inline int make_sic_dbitem(sic_dbitem *p,const int id,const char *imagefile,
 						const char *featurefile,const char * description)
 {
+	p->id=id;
 	strcpy(p->imagefile,imagefile);	
 	strcpy(p->featurefile,featurefile);
 	strcpy(p->description,description);
@@ -60,8 +61,9 @@ sic_dbdao* sic_dbdao_init(sic_dbtype dbtype,const char *arg)
 			dbdao->connect	= sic_sqlite3_open;
 			dbdao->close	= sic_sqlite3_close;
 			dbdao->clear	= sic_sqlite3_clear;
-			dbdao->insert	= sic_sqlite3_insert;
+			dbdao->save		= sic_sqlite3_save;
 			dbdao->query	= sic_sqlite3_query;
+			dbdao->delete	= sic_sqlite3_delete;
 	}
 	int rt=dbdao->connect(arg);
 	if(rt!=0){

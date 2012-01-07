@@ -34,7 +34,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-unknown-linux-gnu
 host_triplet = x86_64-unknown-linux-gnu
-bin_PROGRAMS = ad$(EXEEXT) file$(EXEEXT)
+bin_PROGRAMS = plugc$(EXEEXT)
 subdir = libsic/test
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -47,13 +47,12 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-ad_SOURCES = ad.c
-ad_OBJECTS = ad.$(OBJEXT)
-ad_LDADD = $(LDADD)
-file_SOURCES = file.c
-file_OBJECTS = file.$(OBJEXT)
-file_LDADD = $(LDADD)
-file_DEPENDENCIES =
+plugc_SOURCES = plugc.c
+plugc_OBJECTS = plugc.$(OBJEXT)
+plugc_LDADD = $(LDADD)
+plugc_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(plugc_LDFLAGS) \
+	$(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I. -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -67,8 +66,8 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = ad.c file.c
-DIST_SOURCES = ad.c file.c
+SOURCES = plugc.c
+DIST_SOURCES = plugc.c
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -81,7 +80,7 @@ AUTOMAKE = ${SHELL} /home/rquiss/prog/opencv/final/missing --run automake-1.11
 AWK = gawk
 CC = clang
 CCDEPMODE = depmode=gcc3
-CFLAGS = -O2 -g -Werror
+CFLAGS = -O1 -g -Werror
 CPP = clang -E
 CPPFLAGS = 
 CXX = g++
@@ -126,17 +125,17 @@ OTOOL64 =
 PACKAGE = sic
 PACKAGE_BUGREPORT = vabc3h@gmail.com
 PACKAGE_NAME = SIC
-PACKAGE_STRING = SIC 0.1.2
+PACKAGE_STRING = SIC 0.1.3
 PACKAGE_TARNAME = sic
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.1.2
+PACKAGE_VERSION = 0.1.3
 PATH_SEPARATOR = :
 RANLIB = ranlib
 SED = /bin/sed
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = strip
-VERSION = 0.1.2
+VERSION = 0.1.3
 abs_builddir = /home/rquiss/prog/opencv/final/libsic/test
 abs_srcdir = /home/rquiss/prog/opencv/final/libsic/test
 abs_top_builddir = /home/rquiss/prog/opencv/final
@@ -190,10 +189,10 @@ target_alias =
 top_build_prefix = ../../
 top_builddir = ../..
 top_srcdir = ../..
-AM_CFLAGS = `pkg-config --cflags opencv`
-AM_LDFLAGS = `pkg-config --libs sqlite3 opencv`
-LDADD = -L../ -lsic -L../../libsift -lsift
-ad_DEPENDENCIES = ../libsic.a
+AM_CFLAGS = `pkg-config --cflags opencv` -I..
+LDADD = ../libsic.la
+plugc_DEPENDENCIES = ../libsic.la
+plugc_LDFLAGS = -static
 all: all-am
 
 .SUFFIXES:
@@ -207,9 +206,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign libsic/test/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu libsic/test/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign libsic/test/Makefile
+	  $(AUTOMAKE) --gnu libsic/test/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -271,12 +270,9 @@ clean-binPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
-ad$(EXEEXT): $(ad_OBJECTS) $(ad_DEPENDENCIES) 
-	@rm -f ad$(EXEEXT)
-	$(LINK) $(ad_OBJECTS) $(ad_LDADD) $(LIBS)
-file$(EXEEXT): $(file_OBJECTS) $(file_DEPENDENCIES) 
-	@rm -f file$(EXEEXT)
-	$(LINK) $(file_OBJECTS) $(file_LDADD) $(LIBS)
+plugc$(EXEEXT): $(plugc_OBJECTS) $(plugc_DEPENDENCIES) 
+	@rm -f plugc$(EXEEXT)
+	$(plugc_LINK) $(plugc_OBJECTS) $(plugc_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -284,8 +280,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/ad.Po
-include ./$(DEPDIR)/file.Po
+include ./$(DEPDIR)/plugc.Po
 
 .c.o:
 	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -519,9 +514,8 @@ uninstall-am: uninstall-binPROGRAMS
 	pdf pdf-am ps ps-am tags uninstall uninstall-am \
 	uninstall-binPROGRAMS
 
-
-../libsic.a :
-		make -C ..
+../libsic.la :
+		make -C .. $@
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

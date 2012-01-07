@@ -18,10 +18,13 @@
 
 #ifndef SICDBDAO_H
 #define SICDBDAO_H
-#define STRMLEN 128
+#ifndef STRMLEN
+#define STRMLEN 256
+#endif
 typedef struct sic_dbitem_s{
+	int id;							//ider
 	char imagefile[STRMLEN];        //image path
-	char featurefile[STRMLEN];      //feature file path
+	char featurefile[STRMLEN];      //feature file
 	char description[STRMLEN];      //description
 } sic_dbitem;
 
@@ -36,13 +39,14 @@ struct sic_dbdao_s{
 	int (*connect)(const char *args);
 	int (*close)();
 	int (*clear)();
-	int (*insert)(const sic_dbitem* item);
+	int (*save)(const sic_dbitem* item);
 	int (*query)(const char *key,sic_dbitem** const its,int *count);
+	int (*delete)(const int id);
 };
 
 typedef struct sic_dbdao_s sic_dbdao;
 
-extern inline int make_sic_dbitem(sic_dbitem *item,const char *imagefile,
+extern inline int make_sic_dbitem(sic_dbitem *item,const int id,const char *imagefile,
 		const char *featurefile,const char * description);
 extern void dbitems_print(sic_dbitem **const,const int count);
 extern void dbitem_print(const sic_dbitem*);

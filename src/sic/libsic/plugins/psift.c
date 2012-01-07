@@ -21,7 +21,7 @@
 #include "util.h"
 #include "sift.h"
 #include "kdtree.h"
-#include "feat.h"
+#include "psift.h"
 
 int intvls = SIFT_INTVLS;
 double sigma = SIFT_SIGMA;
@@ -30,6 +30,7 @@ int curv_thr = SIFT_CURV_THR;
 int img_dbl = SIFT_IMG_DBL;
 int descr_width = SIFT_DESCR_WIDTH;
 int descr_hist_bins = SIFT_DESCR_HIST_BINS;
+
 
 int genfeature(const char *imgfile,s_feature **feature,int *n)
 {

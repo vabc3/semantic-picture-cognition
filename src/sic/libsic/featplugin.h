@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  func.h
+ *       Filename:  featplugin.h
  *
- *    Description:  functions
+ *    Description:  Featplug
  *
  *        Version:  1.0
- *        Created:  2011年12月30日 19时19分18秒
+ *        Created:  2012年01月07日 22时46分31秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -16,4 +16,4 @@
  * =====================================================================================
  */
 
-extern void docmd();
+
