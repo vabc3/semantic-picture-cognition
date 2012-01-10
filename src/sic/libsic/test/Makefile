@@ -34,7 +34,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-unknown-linux-gnu
 host_triplet = x86_64-unknown-linux-gnu
-bin_PROGRAMS = plugc$(EXEEXT)
+bin_PROGRAMS = plugc$(EXEEXT) ed$(EXEEXT)
 subdir = libsic/test
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -47,6 +47,10 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
+ed_SOURCES = ed.c
+ed_OBJECTS = ed.$(OBJEXT)
+ed_LDADD = $(LDADD)
+ed_DEPENDENCIES = ../libsic.la
 plugc_SOURCES = plugc.c
 plugc_OBJECTS = plugc.$(OBJEXT)
 plugc_LDADD = $(LDADD)
@@ -66,8 +70,8 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = plugc.c
-DIST_SOURCES = plugc.c
+SOURCES = ed.c plugc.c
+DIST_SOURCES = ed.c plugc.c
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -270,6 +274,9 @@ clean-binPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
+ed$(EXEEXT): $(ed_OBJECTS) $(ed_DEPENDENCIES) 
+	@rm -f ed$(EXEEXT)
+	$(LINK) $(ed_OBJECTS) $(ed_LDADD) $(LIBS)
 plugc$(EXEEXT): $(plugc_OBJECTS) $(plugc_DEPENDENCIES) 
 	@rm -f plugc$(EXEEXT)
 	$(plugc_LINK) $(plugc_OBJECTS) $(plugc_LDADD) $(LIBS)
@@ -280,6 +287,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/ed.Po
 include ./$(DEPDIR)/plugc.Po
 
 .c.o:

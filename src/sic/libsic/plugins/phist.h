@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  psift.h
+ *       Filename:  phist.h
  *
- *    Description:  
+ *    Description:  H for hist
  *
  *        Version:  1.0
- *        Created:  2012年01月08日 00时14分03秒
+ *        Created:  2012年01月09日 22时02分41秒
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -15,12 +15,11 @@
  *
  * =====================================================================================
  */
-#include "imgfeatures.h"
-typedef struct feature s_feature;
-typedef struct siftf
-{
-	int n;
-	s_feature* feat;
-}sic_sift;
+#include "histogram.h"
 
-extern sicpfeat psift;
+typedef struct hist_s
+{
+	float sm[3][DEPS];
+}sic_hist;
+
+extern sicpfeat phist;
