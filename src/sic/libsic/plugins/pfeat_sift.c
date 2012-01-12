@@ -27,10 +27,13 @@
 
 
 /* the maximum number of keypoint NN candidates to check during BBF search */
-#define KDTREE_BBF_MAX_NN_CHKS 200
+#define KDTREE_BBF_MAX_NN_CHKS 150
 
 /* threshold on squared ratio of distances between NN and 2nd NN */
-#define NN_SQ_DIST_RATIO_THR 0.49
+//#define NN_SQ_DIST_RATIO_THR 0.49
+#define NN_SQ_DIST_RATIO_THR 0.34
+
+
 int intvls = SIFT_INTVLS;
 double sigma = SIFT_SIGMA;
 double contr_thr = SIFT_CONTR_THR;
@@ -43,10 +46,10 @@ static int genfeature(IplImage *img,void **out);
 static int save(void *data,char *fn);
 static int load(char *fn,void **data);
 static float comp(void* feat1,void* feat2);
-static char* gendoc(IplImage* img,void* data,char* featkey,char* dir,char* prefix);
+static void* gendoc(IplImage* img,void* data,char* featkey,char* dir,char* prefix);
 
 sicpfeat psift={
-	1,.75,genfeature,save,load,comp,gendoc
+	1,PRSIFT,genfeature,save,load,comp,gendoc
 };
 
 
@@ -67,7 +70,7 @@ static IplImage* stack_imgs( IplImage* img1, IplImage* img2 )
 }
 
 
-static char* gendoc(IplImage* img1,void* data,char* featkey,char* dir,char* prefix)
+static void* gendoc(IplImage* img1,void* data,char* featkey,char* dir,char* prefix)
 {
 	sic_log("sift->gendoc base:%s|%s",dir,prefix);
 	char buf[255];
@@ -104,7 +107,7 @@ static char* gendoc(IplImage* img1,void* data,char* featkey,char* dir,char* pref
 				pt1 = cvPoint( cvRound( feat->x ), cvRound( feat->y ) );
 				pt2 = cvPoint( cvRound( nbrs[0]->x ), cvRound( nbrs[0]->y ) );
 				pt2.y += img1->height;
-				cvLine( img, pt1, pt2, CV_RGB(255,0,255), 1, 8, 0 );
+				cvLine( img, pt1, pt2, CV_RGB(2,0,255), 1, 8, 0 );
 				m++;
 				feat1[i].fwd_match = nbrs[0];
 			}
@@ -122,16 +125,18 @@ static char* gendoc(IplImage* img1,void* data,char* featkey,char* dir,char* pref
 //	cvReleaseImage(&img2);
 
 //	float ft=comp(data,f2);
-	sprintf(buf,"<p>特征匹配相似处%d<br/>"
-			"<img src=\"%ssift.jpg\"/></p>",
-			m,prefix);
+	char* rt1,*rt2;
+	sprintf(buf,"特征匹配相似处%d",m);
+	rt1=(char*)malloc(strlen(buf)+2);
+	strcpy(rt1,buf);
 
+	sprintf(buf,"%s/%ssift.jpg",dir,prefix);
+	rt2=(char*)malloc(strlen(buf)+2);
+	strcpy(rt2,buf);
+	void **rt=(void**)malloc(2*sizeof(void*));
+	*(rt)=rt1;
+	*(rt+1)=rt2;	
 
-
-
-	char* rt;
-	rt=(char*)malloc(strlen(buf)+2);
-	strcpy(rt,buf);
 	return rt;
 }
 
